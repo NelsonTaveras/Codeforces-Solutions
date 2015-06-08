@@ -1,0 +1,26 @@
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
+procedure Foo is
+    S: String(1 .. 55) := (others => ' ');
+    Last: Integer;
+    res: float := 0.0;
+    prob: float := 0.0;
+    cnt: float := 0.0;
+begin
+    Get_Line(S, Last);
+    Get(Item => prob);
+    for Index in S'Range loop
+        if S(S'First + Index - 1) = '1' then
+            res := res + 1.0;
+            cnt := cnt + 1.0;
+        end if;
+        if S(S'First + Index - 1) = '?' then
+            res := res + prob;
+            cnt := cnt + 1.0;
+        end if;
+        if S(S'First + Index - 1) = '0' then
+            cnt := cnt + 1.0;
+        end if;
+    end loop;
+    Put(Item => res / cnt, Aft=>5, Exp=>0);
+end Foo;
